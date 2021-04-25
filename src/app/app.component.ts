@@ -10,14 +10,14 @@ import { MatChipInputEvent } from '@angular/material/chips';
 })
 export class AppComponent {
   title = 'angular-d3';
-  friends: string[] = [];
+  friendsList: string[] = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   myForm: FormGroup;
 
   constructor(fb: FormBuilder) {
     this.myForm = fb.group({
       'name': ['', Validators.required],
-      'friends': [this.friends, Validators.required],
+      'friends': [this.friendsList, Validators.required],
       'age': [null, Validators.required],
       'weight': [null, Validators.required]
     });
@@ -25,7 +25,7 @@ export class AppComponent {
 
   onSubmit(form: FormGroup, formDirective: FormGroupDirective) {
     if (form.invalid || formDirective.invalid) { return; }
-    this.friends = [];
+    this.friendsList = [];
     formDirective.resetForm(); // Angula Material checks the validity of FormGroupDirective and not the FormGroup
   }
 
@@ -34,14 +34,14 @@ export class AppComponent {
     const value = event.value;
 
     if ((value || '').trim()) {
-      this.friends.push(value.trim());
-      this.myForm.get('friends')?.setValue(this.friends);
+      this.friendsList.push(value.trim());
+      this.myForm.get('friends')?.setValue(this.friendsList);
     }
 
     if (input) { input.value = ''; }
   }
 
   remove(friend: string) {
-    this.friends = this.friends.filter(friend => friend !== friend);
+    this.friendsList = this.friendsList.filter(friend => friend !== friend);
   }
 }

@@ -10,11 +10,11 @@
 
     <mat-form-field class="friends-list" appearance="fill">
       <mat-label>Friends</mat-label>
-      <mat-chip-list #friendsList>
-        <mat-chip *ngFor="let friend of friends" [selectable]="true" [removable]="true" (removed)="remove(friend)">
+      <mat-chip-list #friendsChipList>
+        <mat-chip *ngFor="let friend of friendsList" [selectable]="true" [removable]="true" (removed)="remove(friend)">
           {{friend}}
         </mat-chip>
-        <input placeholder="Friends List" [matChipInputFor]="friendsList"
+        <input placeholder="Friends List" [matChipInputFor]="friendsChipList"
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
