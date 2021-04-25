@@ -24,7 +24,7 @@ export class AppComponent {
   }
 
   onSubmit(form: FormGroup, formDirective: FormGroupDirective) {
-    console.log(form);
+    if (form.invalid || formDirective.invalid) { return; }
     this.friends = [];
     formDirective.resetForm(); // Angula Material checks the validity of FormGroupDirective and not the FormGroup
   }
