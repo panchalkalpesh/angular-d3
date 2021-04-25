@@ -2,10 +2,10 @@
 
   <h1>Visualize your Social Network Graph</h1>
 
-  <form>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value, formDirective)" #formDirective="ngForm">
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
-      <input matInput #name placeholder="Ex. John">
+      <input matInput #name placeholder="Ex. John" formControlName="name">
     </mat-form-field>
 
     <mat-form-field class="friends-list" appearance="fill">
@@ -22,20 +22,20 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Age</mat-label>
-      <input matInput #age type="number" placeholder="Ex. 25">
+      <input matInput #age type="number" placeholder="Ex. 25" formControlName="age">
       <span matSuffix *ngIf="age.value"> years</span>
     </mat-form-field>
 
 
     <mat-form-field appearance="fill">
       <mat-label>Weight</mat-label>
-      <input matInput #weight type="number" placeholder="Ex. 70">
-      <span matSuffix *ngIf="weight.value"> kg</span>
+      <input matInput #weight type="number" placeholder="Ex. 70" formControlName="weight">
+      <span matSuffix *ngIf="weight?.value"> kg</span>
     </mat-form-field>
 
     <div class="buttons">
       <button mat-raised-button color="primary">Submit</button>
-      <button mat-raised-button>Reset</button>
+      <button mat-raised-button (click)="myForm.reset()">Reset</button>
     </div>
 
   </form>
