@@ -9,7 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
+import { friendsReducer } from './friends.reducer';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AppComponent } from './app.component';
     MatCheckboxModule,
     MatSelectModule,
     MatChipsModule,
-    MatButtonModule
+    MatButtonModule,
+    StoreModule.forRoot({ friends: friendsReducer })
   ],
   providers: [
     {
