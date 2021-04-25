@@ -24,5 +24,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       min-width: $container-width/2;
       width: 100%;
     }
+
+    .buttons {
+      display: flex;
+      width: 50%;
+      justify-content: space-evenly;
+    }
+
   }
 }
