@@ -40,4 +40,6 @@
 
   </form>
 
+  <app-scatter *ngIf="(friends$|async)?.length" [data]="friends$ | async"></app-scatter>
+
 </main>

@@ -13,11 +13,13 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
+import { ScatterComponent } from './d3';
 import { friendsReducer } from './friends.reducer';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ScatterComponent
   ],
   imports: [
     BrowserModule,
