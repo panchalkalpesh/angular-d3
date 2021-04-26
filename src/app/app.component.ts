@@ -21,15 +21,15 @@ export class AppComponent {
 
   constructor(fb: FormBuilder, private store: Store<{ friends: Friend[] }>) {
     this.myForm = fb.group({
-      'name': ['', Validators.required],
-      'friends': [this.friendsList, Validators.required],
-      'age': [null, Validators.required],
-      'weight': [null, Validators.required]
+      name: ['', Validators.required],
+      friends: [this.friendsList, Validators.required],
+      age: [null, Validators.required],
+      weight: [null, Validators.required]
     });
     this.friends$ = store.select('friends');
   }
 
-  onSubmit(form: FormGroup, formDirective: FormGroupDirective) {
+  onSubmit(form: FormGroup, formDirective: FormGroupDirective): void {
     if (form.invalid || formDirective.invalid) { return; }
     const { name, friends, age, weight } = form.value;
     this.store.dispatch(ADD_FRIEND({ name, friends, age, weight }));

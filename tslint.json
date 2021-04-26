@@ -146,6 +146,7 @@
       true,
       "element",
       "app",
+      "d3",
       "kebab-case"
     ]
   }
