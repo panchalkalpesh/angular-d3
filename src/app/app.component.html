@@ -2,7 +2,7 @@
 
   <h1>Visualize your Social Network Graph</h1>
 
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value, formDirective)" #formDirective="ngForm">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm, formDirective)" #formDirective="ngForm">
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input matInput #name placeholder="Ex. John" formControlName="name">
