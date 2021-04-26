@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { Friend } from '../friends.model';
 
 @Component({
-  selector: 'app-scatter',
+  selector: 'd3-scatter',
   template: `<section><h2>Scatter Plot</h2><figure id="scatter"></figure></section>`
 })
 export class ScatterComponent implements OnInit, OnChanges {
@@ -16,13 +16,15 @@ export class ScatterComponent implements OnInit, OnChanges {
   private height = 320 - (this.margin * 2);
   private scaleBuffer = 4;
 
-  constructor() { this.svg = d3.select('figure#scatter'); }
+  constructor() {
+    this.svg = d3.select('figure#scatter');
+  }
 
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data && changes.data.currentValue) {
-      this.initializeSVG();
+      if (changes.data.firstChange) { this.initializeSVG(); }
       this.drawPlot();
     }
   }
