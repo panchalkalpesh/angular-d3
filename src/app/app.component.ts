@@ -49,7 +49,7 @@ export class AppComponent {
     if (input) { input.value = ''; }
   }
 
-  remove(friend: string) {
-    this.friendsList = this.friendsList.filter(friend => friend !== friend);
+  remove(friend: string): void {
+    this.friendsList = this.friendsList.filter(f => f !== friend);
   }
 }
