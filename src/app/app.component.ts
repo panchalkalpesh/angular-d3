@@ -28,6 +28,13 @@ export class AppComponent {
     this.friends$ = store.select('friends');
   }
 
+
+  /**
+   * Handler for Submitting the Form, Adds Valid Inputs to Friends[]
+   * @param form FormGroup
+   * @param formDirective FormGroupDirective
+   * @returns void
+   */
   onSubmit(form: FormGroup, formDirective: FormGroupDirective): void {
     if (form.invalid || formDirective.invalid) { return; }
     const { name, friends, age, weight } = form.value;
@@ -36,6 +43,11 @@ export class AppComponent {
     formDirective.resetForm(); // Angula Material checks the validity of FormGroupDirective and not the FormGroup
   }
 
+
+  /**
+   * Adds a chip to friendsList / friendsChipList and resets the input
+   * @param event MatChipInputEvent containing a Friend's Name of type string
+   */
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -48,6 +60,11 @@ export class AppComponent {
     if (input) { input.value = ''; }
   }
 
+
+  /**
+   * Removes a Friend from friendsList / friendsChipList, Invokes on backspace / delete
+   * @param friend Friend's Name to be removed
+   */
   remove(friend: string): void {
     this.friendsList = this.friendsList.filter(f => f !== friend);
   }

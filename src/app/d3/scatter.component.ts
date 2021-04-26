@@ -29,6 +29,10 @@ export class ScatterComponent implements OnInit, OnChanges {
     }
   }
 
+
+  /**
+   * Initialize SVG (required only once at bootstrapping)
+   */
   private initializeSVG(): void {
     this.svg = d3.select('figure#scatter')
       .append('svg')
@@ -38,6 +42,10 @@ export class ScatterComponent implements OnInit, OnChanges {
       .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')');
   }
 
+
+  /**
+   * Draw the Scatter Plot with Friends[] within a pre-initialized SVG
+   */
   private drawPlot(): void {
     if (!this.data) { return; }
 
