@@ -1,18 +1,22 @@
-import { TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
+import { Friend } from './friends.model';
 import { friendsReducer } from './friends.reducer';
 
 describe('AppComponent', () => {
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
@@ -32,24 +36,48 @@ describe('AppComponent', () => {
         StoreModule.forRoot({ friends: friendsReducer }),
       ]
     }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'angular-d3'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-d3');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should render the title', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Visualize your Social Network Graph');
   });
+
+  it('should add a friend to friendsList', () => {
+    const input = fixture.debugElement.query(By.css('.friends-list input'));
+    expect(component.friendsList).toEqual([]);
+    input.triggerEventHandler('matChipInputTokenEnd', { value: 'John Doe' });
+    expect(component.friendsList).toEqual(['John Doe']);
+  });
+
+  it('should remove a friend from friendsList', () => {
+    component.friendsList = ['Samantha Midge', 'John Doe'];
+    component.remove('John Doe');
+    expect(component.friendsList).toEqual(['Samantha Midge']);
+  });
+
+  it('should update application state onSubmit', () => {
+    const formDirective = new FormGroupDirective([], []);
+    spyOn(formDirective, 'resetForm').and.returnValue();
+    const payload: Friend = {
+      name: 'John Doe',
+      friends: ['David Tenzing', 'Marva Youta'],
+      age: 34,
+      weight: 75
+    };
+    component.myForm.setValue(payload);
+    component.onSubmit(component.myForm, formDirective);
+    component.friends$.subscribe(friends => {
+      expect(friends.find(friend => payload.name === friend.name)).toBeTruthy();
+    });
+  });
+
 });

@@ -13,7 +13,6 @@ import { Friend } from './friends.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-d3';
   friendsList: string[] = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   myForm: FormGroup;
